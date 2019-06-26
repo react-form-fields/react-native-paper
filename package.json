@@ -1,0 +1,59 @@
+{
+  "name": "@react-form-fields/native-base",
+  "description": "Native Base Form Fields",
+  "private": false,
+  "keywords": [
+    "native-base",
+    "react",
+    "react native",
+    "react-form",
+    "form",
+    "validation",
+    "mobile"
+  ],
+  "version": "1.3.0",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Prado",
+    "email": "danielprado.ad@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-form-fields/native-base"
+  },
+  "bugs": {
+    "url": "https://github.com/react-form-fields/native-base/issues"
+  },
+  "scripts": {
+    "docs:dev": "(cd docs/project && yarn && yarn start)",
+    "docs:build": "sh docs/build.sh",
+    "prepare": "yarn tsc"
+  },
+  "dependencies": {
+    "@react-form-fields/core": "^2.0.0",
+    "date-fns": "^2.0.0-alpha.21",
+    "react": ">=16.6.0",
+    "react-native": ">=0.56.0",
+    "react-native-modal-datetime-picker": "^7.4.2",
+    "react-native-paper": ">=2.16.0",
+    "tslib": "^1.10.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.6.0",
+    "react-native-paper": ">=2.16.0",
+    "react-native": ">=0.56.0"
+  },
+  "devDependencies": {
+    "@types/node": "12.0.10",
+    "@types/prop-types": "15.7.1",
+    "@types/react": "16.8.22",
+    "@types/react-native": "0.57.64",
+    "husky": "2.5.0",
+    "tslint": "5.18.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-react": "4.0.0",
+    "typescript": "3.5.2"
+  }
+}
