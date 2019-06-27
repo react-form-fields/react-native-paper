@@ -6,7 +6,7 @@ import React, { Fragment, memo, useCallback, useMemo } from 'react';
 import { TextStyle } from 'react-native';
 import { Text, TextInput, TextInputProps, Theme, withTheme } from 'react-native-paper';
 
-interface IProps extends PropsResolver<TextInputProps> {
+export interface IFieldTextProps extends PropsResolver<TextInputProps> {
   value: string;
   onChange: (value: string) => void;
   theme: Theme;
@@ -14,7 +14,7 @@ interface IProps extends PropsResolver<TextInputProps> {
 
 }
 
-const FieldText = memo((props: IProps) => {
+const FieldText = memo((props: IFieldTextProps) => {
   const { onChange, theme, styleError: styleErrorProp } = props;
 
   const { setDirty, showError, isValid, errorMessage } = useValidation(props);

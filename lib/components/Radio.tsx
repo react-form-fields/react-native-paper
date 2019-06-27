@@ -5,7 +5,7 @@ import React, { Fragment, memo, ReactNode, useCallback, useMemo } from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { Paragraph, RadioButton, RadioButtonProps, Text, Theme, withTheme } from 'react-native-paper';
 
-interface IProps extends PropsResolver<RadioButtonProps> {
+export interface IFieldSwitchProps extends PropsResolver<RadioButtonProps> {
   label?: ReactNode;
   value: string;
   radioValue: string;
@@ -14,7 +14,7 @@ interface IProps extends PropsResolver<RadioButtonProps> {
   styleError?: TextStyle;
 }
 
-const FieldSwitch = memo((props: IProps) => {
+const FieldSwitch = memo((props: IFieldSwitchProps) => {
   const { onChange, theme, value, radioValue, label, styleError: styleErrorProp } = props;
 
   const { setDirty, showError, errorMessage } = useValidation(props);

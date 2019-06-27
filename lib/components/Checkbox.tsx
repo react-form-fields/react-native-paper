@@ -5,7 +5,7 @@ import React, { Fragment, memo, ReactNode, useCallback, useMemo } from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { Checkbox, CheckboxProps, Paragraph, Text, Theme, withTheme } from 'react-native-paper';
 
-interface IProps extends PropsResolver<CheckboxProps> {
+export interface IFieldSwitchProps extends PropsResolver<CheckboxProps> {
   label?: ReactNode;
   value: never;
   checked: boolean;
@@ -14,7 +14,7 @@ interface IProps extends PropsResolver<CheckboxProps> {
   styleError?: TextStyle;
 }
 
-const FieldSwitch = memo((props: IProps) => {
+const FieldSwitch = memo((props: IFieldSwitchProps) => {
   const { onChange, theme, checked, label, styleError: styleErrorProp } = props;
 
   const { setDirty, showError, errorMessage } = useValidation(props);

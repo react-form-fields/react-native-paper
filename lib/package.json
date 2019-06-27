@@ -33,6 +33,12 @@
     "prepare": "yarn tsc",
     "lint": "yarn eslint \"./**/*.ts\" \"./**/*.tsx\""
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "concurrently -r \"yarn lint\" \"yarn tsc --noEmit\"",
+      "post-merge": "yarn"
+    }
+  },
   "dependencies": {
     "@react-form-fields/core": "^2.0.5",
     "date-fns": "^2.0.0-alpha.21",
@@ -54,9 +60,10 @@
     "@types/react-native": "0.57.64",
     "@typescript-eslint/eslint-plugin": "1.11.0",
     "@typescript-eslint/parser": "1.11.0",
+    "concurrently": "4.1.1",
     "eslint": "6.0.1",
     "eslint-plugin-react": "7.14.2",
-    "husky": "2.5.0",
+    "husky": "2.4.1",
     "typescript": "3.5.2"
   }
 }
