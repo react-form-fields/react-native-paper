@@ -1,0 +1,16 @@
+{
+	"folders": [{
+		"name": "lib",
+		"path": "./lib"
+	}, {
+		"name": "dev",
+		"path": "./dev"
+	}, {
+		"name": "all",
+		"path": "."
+	}],
+	"settings": {
+		"typescript.tsdk": "node_modules/typescript/lib",
+		"eslint.enable": true
+	}
+}
