@@ -1,9 +1,8 @@
-import '.';
-
-import { IConfig } from '@react-form-fields/core/config';
 import CoreConfigBuilder from '@react-form-fields/core/config/builder';
 
-export default class ConfigBuilder extends CoreConfigBuilder {
+import { IConfig } from './context';
+
+export default class ConfigBuilder extends CoreConfigBuilder<IConfig> {
   public setDateConfig(locale: any, formats: IConfig['date']['formats'], labels: IConfig['date']['labels']) {
     this.config = {
       ...this.config,
@@ -23,5 +22,23 @@ export default class ConfigBuilder extends CoreConfigBuilder {
       validationOn: event
     };
     return this;
+  }
+
+  public clean() {
+    return {
+      ...super.clean(),
+      validationOn: 'onSubmit',
+      date: {
+        formats: {
+          date: 'yyyy-MM-dd',
+          time: 'HH:ss',
+          dateTime: 'yyyy-MM-dd HH:ss',
+        },
+        labels: {
+          ok: 'Ok',
+          cancel: 'Cancel',
+        }
+      }
+    };
   }
 }

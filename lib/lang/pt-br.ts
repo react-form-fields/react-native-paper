@@ -1,4 +1,4 @@
-import { IConfig } from '@react-form-fields/core/config';
+import { IConfig } from '@react-form-fields/core/config/context';
 import coreLangPTBR from '@react-form-fields/core/lang/pt-br';
 import * as locale from 'date-fns/locale/pt-BR';
 

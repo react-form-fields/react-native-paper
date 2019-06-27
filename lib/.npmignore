@@ -10,3 +10,5 @@
 *.tgz
 *.log
 *.lock
+.eslintrc.json
+.eslintignore

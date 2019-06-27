@@ -1,9 +1,11 @@
-import * as coreConfig from '@react-form-fields/core/config';
-import { NativeBase } from 'native-base';
+import FieldValidationConfigContextCore from '@react-form-fields/core/config/context';
 
-declare module '@react-form-fields/core/config' {
+import ConfigBuilderClass from './builder';
+
+export { IConfig } from '@react-form-fields/core/config/context';
+
+declare module '@react-form-fields/core/config/context' {
   interface IConfig {
-    iconType?: NativeBase.Icon['type'];
     validationOn?: 'onChange' | 'onBlur' | 'onSubmit';
     date?: {
       locale?: any;
@@ -20,42 +22,7 @@ declare module '@react-form-fields/core/config' {
   }
 }
 
-const defaultConfig: coreConfig.IConfig = {
-  validationOn: 'onSubmit',
-  date: {
-    formats: {
-      date: 'yyyy-MM-dd',
-      time: 'HH:ss',
-      dateTime: 'yyyy-MM-dd HH:ss',
-    },
-    labels: {
-      ok: 'Ok',
-      cancel: 'Cancel',
-    }
-  }
-};
+export const ConfigBuilder = ConfigBuilderClass;
 
-export function getConfig(): coreConfig.IConfig {
-  const config = coreConfig.getConfig() || {};
-  return {
-    ...defaultConfig,
-    ...config,
-    date: {
-      ...defaultConfig.date,
-      ...(config.date || {}),
-      formats: {
-        ...defaultConfig.date.formats,
-        ...((config.date || {}).formats || {})
-      },
-      labels: {
-        ...defaultConfig.date.labels,
-        ...((config.date || {}).formats || {})
-      }
-    }
-
-  };
-}
-
-export function setConfig(config: coreConfig.IConfig) {
-  coreConfig.setConfig(config);
-}
+const FieldValidationConfigContext = FieldValidationConfigContextCore;
+export default FieldValidationConfigContext;

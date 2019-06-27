@@ -29,10 +29,12 @@
   "scripts": {
     "docs:dev": "(cd docs/project && yarn && yarn start)",
     "docs:build": "sh docs/build.sh",
-    "prepare": "yarn tsc"
+    "preprepare": "yarn lint",
+    "prepare": "yarn tsc",
+    "lint": "yarn eslint \"./**/*.ts\" \"./**/*.tsx\""
   },
   "dependencies": {
-    "@react-form-fields/core": "^2.0.0",
+    "@react-form-fields/core": "^2.0.5",
     "date-fns": "^2.0.0-alpha.21",
     "react": ">=16.6.0",
     "react-native": ">=0.56.0",
@@ -42,18 +44,19 @@
   },
   "peerDependencies": {
     "react": ">=16.6.0",
-    "react-native-paper": ">=2.16.0",
-    "react-native": ">=0.56.0"
+    "react-native": ">=0.56.0",
+    "react-native-paper": ">=2.16.0"
   },
   "devDependencies": {
     "@types/node": "12.0.10",
     "@types/prop-types": "15.7.1",
     "@types/react": "16.8.22",
     "@types/react-native": "0.57.64",
+    "@typescript-eslint/eslint-plugin": "1.11.0",
+    "@typescript-eslint/parser": "1.11.0",
+    "eslint": "6.0.1",
+    "eslint-plugin-react": "7.14.2",
     "husky": "2.5.0",
-    "tslint": "5.18.0",
-    "tslint-eslint-rules": "5.4.0",
-    "tslint-react": "4.0.0",
     "typescript": "3.5.2"
   }
 }
