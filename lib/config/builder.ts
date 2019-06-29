@@ -2,12 +2,13 @@ import CoreConfigBuilder from '@react-form-fields/core/config/builder';
 
 import { IConfig } from './context';
 
-export default class ConfigBuilder extends CoreConfigBuilder<IConfig> {
-  public setDateConfig(locale: any, formats: IConfig['date']['formats'], labels: IConfig['date']['labels']) {
+export default class ConfigBuilder extends CoreConfigBuilder {
+  public setDateConfig(locale: any, pickerLocale: string, formats: IConfig['date']['formats'], labels: IConfig['date']['labels']) {
     this.config = {
       ...this.config,
       date: {
         locale,
+        pickerLocale,
         formats,
         labels
       }
@@ -24,15 +25,26 @@ export default class ConfigBuilder extends CoreConfigBuilder<IConfig> {
     return this;
   }
 
+  public setTextMode(textMode: IConfig['textMode']) {
+    this.config = {
+      ...this.config,
+      textMode
+    };
+    return this;
+  }
+
   public clean() {
-    return {
+    this.config = {
       ...super.clean(),
       validationOn: 'onSubmit',
+      textMode: null,
       date: {
+        locale: null,
+        pickerLocale: 'en-US',
         formats: {
           date: 'yyyy-MM-dd',
           time: 'HH:ss',
-          dateTime: 'yyyy-MM-dd HH:ss',
+          datetime: 'yyyy-MM-dd HH:ss',
         },
         labels: {
           ok: 'Ok',
@@ -40,5 +52,7 @@ export default class ConfigBuilder extends CoreConfigBuilder<IConfig> {
         }
       }
     };
+
+    return this;
   }
 }

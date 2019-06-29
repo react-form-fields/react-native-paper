@@ -6,10 +6,11 @@ const langPTBR: IConfig = {
   ...coreLangPTBR,
   date: {
     locale,
+    pickerLocale: 'pt-BR',
     formats: {
       date: 'dd/MM/yyyy',
-      time: 'HH:ss',
-      dateTime: 'dd/MM/yyyy HH:ss',
+      time: 'HH:mm',
+      datetime: 'dd/MM/yyyy HH:mm'
     },
     labels: {
       ok: 'Ok',

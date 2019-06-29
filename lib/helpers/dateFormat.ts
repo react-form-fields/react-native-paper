@@ -1,26 +1,25 @@
-// import { IConfig } from '@react-form-fields/core/config';
-// import * as format from 'date-fns/format';
+import * as format from 'date-fns/format';
 
-// import { getConfig } from '../config/context';
+import { IConfig } from '../config/context';
 
-// const defaultFormats = {
-//   date: 'yyyy-MM-dd',
-//   time: 'HH:mm',
-//   dateTime: 'yyyy-MM-dd HH:mm'
-// };
+const defaultFormats = {
+  date: 'yyyy-MM-dd',
+  time: 'HH:mm',
+  dateTime: 'yyyy-MM-dd HH:mm'
+};
 
-// export function dateFormat(value: Date, mode: string): string {
-//   if (!value || !(value instanceof Date)) return '';
-//   if (isNaN(value.getTime())) return '';
+export function dateFormat(value: Date, mode: string, config: IConfig): string {
+  if (!value || !(value instanceof Date)) return '';
+  if (isNaN(value.getTime())) return '';
 
-//   const config = getConfigDate();
-//   const formatString = config.formats[mode] || defaultFormats[mode] || mode;
-//   return format(value, formatString, config.locale ? { locale: config.locale } : null);
-// }
+  const dateConfig = getConfigDate(config);
+  const formatString = dateConfig.formats[mode] || defaultFormats[mode] || mode;
+  return format(value, formatString, dateConfig.locale ? { locale: dateConfig.locale } : null);
+}
 
-// function getConfigDate(): IConfig['date'] {
-//   return {
-//     ...(getConfig().date || {}),
-//     formats: ((getConfig().date || {}).formats || {})
-//   };
-// }
+function getConfigDate(config: IConfig): IConfig['date'] {
+  return {
+    ...(config.date || {}),
+    formats: ((config.date || {} as any).formats || {})
+  } as any;
+}

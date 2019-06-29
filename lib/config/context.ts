@@ -7,14 +7,16 @@ export { IConfig } from '@react-form-fields/core/config/context';
 declare module '@react-form-fields/core/config/context' {
   interface IConfig {
     validationOn?: 'onChange' | 'onBlur' | 'onSubmit';
+    textMode?: 'flat' | 'outlined';
     date?: {
-      locale?: any;
-      formats?: {
-        date?: string;
-        time?: string;
-        dateTime?: string;
+      locale: any;
+      pickerLocale: string;
+      formats: {
+        date: string;
+        time: string;
+        datetime: string;
       },
-      labels?: {
+      labels: {
         ok: string;
         cancel: string;
       }

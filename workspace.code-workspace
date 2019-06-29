@@ -10,7 +10,7 @@
 		"path": "."
 	}],
 	"settings": {
-		"typescript.tsdk": "node_modules/typescript/lib",
+		"typescript.tsdk": "lib/node_modules/typescript/lib",
 		"eslint.enable": true
 	}
 }
