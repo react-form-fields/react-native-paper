@@ -1,3 +1,4 @@
+import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
@@ -6,11 +7,13 @@ import DateTimePicker, { DateTimePickerProps } from 'react-native-modal-datetime
 
 import FieldValidationConfigContext from '../config/context';
 import { dateFormat } from '../helpers/dateFormat';
+import useFieldFlow, { IFlowIndexProp } from '../hooks/useFieldFlow';
 import FieldText, { IFieldTextProps } from './Text';
 
 export interface IFieldDatepickerProps extends
   PropsResolver<IFieldTextProps, 'mode' | 'theme'>,
-  PropsResolver<DateTimePickerProps, 'onConfirm' | 'onCancel' | 'isVisible' | 'date'> {
+  PropsResolver<DateTimePickerProps, 'onConfirm' | 'onCancel' | 'isVisible' | 'date'>,
+  IFlowIndexProp {
   value: Date;
   onChange: (value: Date) => void;
 }
@@ -20,17 +23,22 @@ const nullCallback = () => { };
 const FieldDatepicker = React.memo((props: IFieldDatepickerProps) => {
   const { value, onChange, mode, ...otherProps } = props;
 
+  const config = React.useContext(FieldValidationConfigContext);
   const [showPicker, setShowPicker] = React.useState(false);
   const { setDirty, showError, errorMessage } = useValidation(props);
-  const config = React.useContext(FieldValidationConfigContext);
+
+  const onFocusFlow = React.useCallback(() => setShowPicker(true), [setShowPicker]);
+  const [goNext, , currentIndex] = useFieldFlow(props, onFocusFlow);
 
   const onTouchEndHandler = React.useCallback(() => setShowPicker(true), [setShowPicker]);
+  const datePickerProps = useMemoOtherProps(props, 'value', 'onChange');
 
   const onConfirmHandler = React.useCallback((value: Date) => {
     setDirty(true);
     onChange(value);
     setShowPicker(false);
-  }, []);
+    goNext(currentIndex);
+  }, [currentIndex]);
 
   const onCancelHandler = React.useCallback(() => setShowPicker(false), [setShowPicker]);
 
@@ -40,6 +48,7 @@ const FieldDatepicker = React.memo((props: IFieldDatepickerProps) => {
         <View pointerEvents='none'>
           <FieldText
             {...otherProps}
+            ref={null}
             value={dateFormat(value, mode || 'date', config)}
             validation={null}
             errorMessage={showError ? errorMessage : null}
@@ -54,7 +63,7 @@ const FieldDatepicker = React.memo((props: IFieldDatepickerProps) => {
         confirmTextIOS={config.date.labels.ok}
         cancelTextIOS={config.date.labels.cancel}
         locale={config.date.pickerLocale}
-        {...otherProps}
+        {...datePickerProps}
         mode={mode}
         date={value || new Date()}
         isVisible={showPicker}

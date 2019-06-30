@@ -658,12 +658,13 @@
     hoist-non-react-statics "^2.5.0"
     prop-types "^15.6.0"
 
-"@react-form-fields/core@^2.0.12":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.0.12.tgz#1eaa395a22b5bef435444c51bcbca1f6b1e93256"
-  integrity sha512-n3+QLAEBH7f5+SuveQjqujV+ZRP/8bvVpH/HCbw62YrnoGeb44JhuYDzvRzFRmU/qIQ96ftu8VQ07wg+qrrh3Q==
+"@react-form-fields/core@^2.0.17":
+  version "2.0.17"
+  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.0.17.tgz#f2757a00a8a415fea864461d7dfb5496d995726a"
+  integrity sha512-YcDOEfoPXVSkDUnLLsXVZh7hYP7LnkB2Y8uQA3jZ8bIPv25f0IwYvU9VD4L/qGJe0rovMfiTrOU1YWSJvdCt5w==
   dependencies:
     "@types/validatorjs" "^3.15.0"
+    intl "^1.2.5"
     lodash ">=4.0.0"
     react ">=16.8.0"
     tslib ">=1.10.0"
@@ -2542,7 +2543,7 @@ inquirer@^6.2.2:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-intl@>=1.2.5:
+intl@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/intl/-/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
   integrity sha1-giRKIZDE5Bn4Nx9ao02qNCDiq94=
