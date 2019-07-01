@@ -18,7 +18,7 @@
   },
   "resolutions": {
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "@react-form-fields/core": "^2.1.0"
+    "@react-form-fields/core": "^2.2.2"
   },
   "devDependencies": {
     "@types/react": "16.8.22",

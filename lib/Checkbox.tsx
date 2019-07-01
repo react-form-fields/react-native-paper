@@ -5,9 +5,10 @@ import * as React from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { Checkbox, CheckboxProps, Paragraph, Text, Theme, withTheme } from 'react-native-paper';
 
+import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
 import TouchableEffect from './shared/TouchableEffect';
 
-export interface IFieldSwitchProps extends PropsResolver<CheckboxProps, 'status' | 'mask'> {
+export interface IFieldSwitchProps extends PropsResolver<CheckboxProps, 'status' | 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
   value: boolean;
   onChange: (value: boolean) => void;
@@ -21,6 +22,9 @@ const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
 
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'label', 'styleError', 'marginBottom');
+
+  const onFocusFlow = React.useCallback(() => { }, []);
+  useFieldFlow(props, onFocusFlow);
 
   const onChangeHandler = React.useCallback(() => {
     setDirty(true);

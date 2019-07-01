@@ -5,28 +5,32 @@ import * as React from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { Paragraph, RadioButton, RadioButtonProps, Text, Theme, withTheme } from 'react-native-paper';
 
+import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
 import TouchableEffect from './shared/TouchableEffect';
 
-export interface IFieldSwitchProps extends PropsResolver<RadioButtonProps, 'status' | 'mask'> {
+export interface IFieldSwitchProps extends PropsResolver<RadioButtonProps, 'status' | 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
-  value: string;
-  radioValue: string;
+  value: string | number;
+  radioValue: string | number;
   onChange: (radioValue: any) => void;
   theme: Theme;
   styleError?: TextStyle;
   marginBottom?: boolean;
 }
 
-const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
+const FieldSwitch = withTheme(React.memo((props: IFieldSwitchProps) => {
   const { onChange, theme, label, styleError: styleErrorProp, value, marginBottom, radioValue } = props;
 
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'label', 'styleError', 'marginBottom', 'radioValue');
 
+  const onFocusFlow = React.useCallback(() => { }, []);
+  useFieldFlow(props, onFocusFlow);
+
   const onChangeHandler = React.useCallback(() => {
     setDirty(true);
     onChange(radioValue);
-  }, [value, onChange, setDirty]);
+  }, [onChange, setDirty, radioValue]);
 
   const styleError = React.useMemo<TextStyle>(() => ({
     color: theme.colors.error,
@@ -43,7 +47,7 @@ const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
           <View style={styles.row}>
             <RadioButton.Android
               {...otherProps}
-              value={radioValue}
+              value={radioValue.toString()}
               status={value === radioValue ? 'checked' : 'unchecked'}
               onPress={onChangeHandler}
             />
@@ -56,7 +60,7 @@ const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
       </TouchableEffect>
     </View>
   );
-});
+}));
 
 const styles = StyleSheet.create({
   margin: {
@@ -77,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(FieldSwitch);
+export default FieldSwitch;

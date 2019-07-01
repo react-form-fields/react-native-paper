@@ -21,7 +21,7 @@ const useFieldFlow = ({ flowIndex, tabIndex }: IFlowIndexProp, onFocusHandler: F
   const context = React.useContext(FieldFlowContext);
 
   React.useEffect(() => {
-    context.unregisterPosition(previousIndex.current);
+    context && context.unregisterPosition(previousIndex.current);
     previousIndex.current = index;
   }, [index]);
 
@@ -30,8 +30,8 @@ const useFieldFlow = ({ flowIndex, tabIndex }: IFlowIndexProp, onFocusHandler: F
       return () => { };
     }
 
-    context.registerPosition(index, onFocusHandler);
-    return () => context.unregisterPosition(index);
+    context && context.registerPosition(index, onFocusHandler);
+    return () => context && context.unregisterPosition(index);
   }, [index, onFocusHandler]);
 
   return React.useMemo(() => {

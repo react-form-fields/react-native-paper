@@ -5,7 +5,9 @@ import * as React from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { Paragraph, Switch, SwitchProps, Text, Theme, withTheme } from 'react-native-paper';
 
-export interface IFieldSwitchProps extends PropsResolver<SwitchProps, 'mask'> {
+import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
+
+export interface IFieldSwitchProps extends PropsResolver<SwitchProps, 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
   value?: boolean;
   onChange: (checked: boolean) => void;
@@ -19,6 +21,9 @@ const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
 
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'checked', 'onChange', 'label', 'styleError', 'marginBottom');
+
+  const onFocusFlow = React.useCallback(() => { }, []);
+  useFieldFlow(props, onFocusFlow);
 
   const onChangeHandler = React.useCallback((value: boolean) => {
     setDirty(true);

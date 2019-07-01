@@ -68,7 +68,7 @@ const FieldText = withTheme(React.memo(React.forwardRef<IFieldTextRef, IFieldTex
         mode={config.textMode}
         {...otherProps}
         ref={textInputRef}
-        value={maskedValue}
+        value={(maskedValue || '').toString()}
         onChangeText={onChangeHandler}
         returnKeyType={hasValidIndex ? 'next' : 'default'}
         onSubmitEditing={onSubmitHandler}

@@ -12,7 +12,6 @@ const ValidationContext = React.memo(React.forwardRef<IValidationContextRef, IVa
     const [fields, setFields] = React.useState<{ position: number, onFocusHandler: Function }[]>([]);
     const fieldFlow = React.useMemo<IFieldFlowContext>(() => {
       return {
-        id: Date.now(),
         registerPosition(position: number, onFocusHandler: Function): void {
           setFields(fields => [...fields.filter(f => f.position !== position), { position, onFocusHandler }]);
         },

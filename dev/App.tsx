@@ -1,16 +1,26 @@
-import FieldCheckbox from '@react-form-fields/react-native-paper/components/Checkbox';
-import FieldDatepicker from '@react-form-fields/react-native-paper/components/Datepicker';
-import FieldRadio from '@react-form-fields/react-native-paper/components/Radio';
-import FieldSwitch from '@react-form-fields/react-native-paper/components/Switch';
-import FieldText from '@react-form-fields/react-native-paper/components/Text';
-import ValidationContext from '@react-form-fields/react-native-paper/components/ValidationContext';
-import FieldValidationConfigContext, { ConfigBuilder } from '@react-form-fields/react-native-paper/config/context';
-import langConfig from '@react-form-fields/react-native-paper/lang/en-us';
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import { IValidationContextRef } from '@react-form-fields/core/ValidationContext';
+import FieldCheckbox from '@react-form-fields/react-native-paper/Checkbox';
+import ConfigProvider, { ConfigBuilder } from '@react-form-fields/react-native-paper/ConfigProvider';
+import langConfig from '@react-form-fields/react-native-paper/ConfigProvider/langs/en-us';
+import FieldDatepicker from '@react-form-fields/react-native-paper/Datepicker';
+import FieldRadio from '@react-form-fields/react-native-paper/Radio';
+import FieldSelect from '@react-form-fields/react-native-paper/Select';
+import FieldSwitch from '@react-form-fields/react-native-paper/Switch';
+import FieldText from '@react-form-fields/react-native-paper/Text';
+import ValidationContext from '@react-form-fields/react-native-paper/ValidationContext';
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import { Appbar, Button, DarkTheme, DefaultTheme, Provider as PaperProvider, ThemeShape } from 'react-native-paper';
+import {
+  Appbar,
+  Button,
+  DarkTheme,
+  DefaultTheme,
+  Provider as PaperProvider,
+  Snackbar,
+  ThemeShape,
+} from 'react-native-paper';
 
-const config = new ConfigBuilder().fromLang(langConfig).setTextMode('outlined').build()
+const config = new ConfigBuilder().fromLang(langConfig).setTextMode('outlined').build();
 
 const primary = '#011B39';
 const accent = '#FFCC33';
@@ -18,12 +28,16 @@ const accent = '#FFCC33';
 const App = memo(() => {
   const [theme, setTheme] = useState<ThemeShape>({ ...DefaultTheme, colors: { ...DefaultTheme.colors, primary, accent } });
   const scroolViewStyle = useMemo(() => ({ ...styles.scroolView, backgroundColor: theme.colors.background }), [theme.colors.background])
+  const validationRef = useRef<IValidationContextRef>();
 
+  const [messageForm, setMessageForm] = useState('');
   const [value, setValue] = useState('');
+  const [valueSelect, setValueSelect] = useState(0);
   const [valueDark, setValueDark] = useState(false);
   const [valueRadio, setValueRadio] = useState('');
   const [valueMoney, setValueMoney] = useState(0);
   const [valueDate, setValueDate] = useState(new Date);
+  const selectOptions = useMemo(() => new Array(10).fill('a').map((v, i) => ({ value: i + 1, label: `Options ${(i + 1)}` })), []);
 
   const setValueDarkCallback = useCallback((value: boolean) => {
     setTheme({ ...(value ? DarkTheme : DefaultTheme), colors: { ...(value ? DarkTheme : DefaultTheme).colors, primary, accent } });
@@ -31,8 +45,11 @@ const App = memo(() => {
   }, [setValueDark]);
 
   const handleSave = useCallback(() => {
+    const message = validationRef.current.isValid() ? 'Valid' : 'Invalid';
+    setMessageForm(message);
+  }, [validationRef, setMessageForm]);
 
-  }, []);
+  const handleDismissSnackbar = useCallback(() => setMessageForm(''), [setMessageForm]);
 
 
   return (
@@ -46,8 +63,8 @@ const App = memo(() => {
       <KeyboardAvoidingView style={styles.keyboardView} behavior="padding">
         <ScrollView style={scroolViewStyle}>
           <View style={styles.content}>
-            <FieldValidationConfigContext.Provider value={config}>
-              <ValidationContext>
+            <ConfigProvider value={config}>
+              <ValidationContext ref={validationRef}>
                 <FieldSwitch
                   label='Dark Mode'
                   value={valueDark}
@@ -128,12 +145,24 @@ const App = memo(() => {
                   marginBottom
                 />
 
+                <FieldSelect
+                  label='Select'
+                  flowIndex={8}
+                  value={valueSelect}
+                  options={selectOptions}
+                  onChange={setValueSelect}
+                  validation='required|date'
+                  marginBottom
+                />
+
                 <Button mode='contained' onPress={handleSave}>Save</Button>
               </ValidationContext>
-            </FieldValidationConfigContext.Provider>
+            </ConfigProvider>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <Snackbar visible={!!messageForm} onDismiss={handleDismissSnackbar}>{messageForm}</Snackbar>
     </PaperProvider>
   );
 });
