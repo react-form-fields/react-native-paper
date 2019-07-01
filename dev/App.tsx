@@ -8,7 +8,7 @@ import FieldValidationConfigContext, { ConfigBuilder } from '@react-form-fields/
 import langConfig from '@react-form-fields/react-native-paper/lang/en-us';
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import { Appbar, DarkTheme, DefaultTheme, Provider as PaperProvider, ThemeShape } from 'react-native-paper';
+import { Appbar, Button, DarkTheme, DefaultTheme, Provider as PaperProvider, ThemeShape } from 'react-native-paper';
 
 const config = new ConfigBuilder().fromLang(langConfig).setTextMode('outlined').build()
 
@@ -29,6 +29,10 @@ const App = memo(() => {
     setTheme({ ...(value ? DarkTheme : DefaultTheme), colors: { ...(value ? DarkTheme : DefaultTheme).colors, primary, accent } });
     setValueDark(value);
   }, [setValueDark]);
+
+  const handleSave = useCallback(() => {
+
+  }, []);
 
 
   return (
@@ -75,23 +79,23 @@ const App = memo(() => {
                 />
 
                 <FieldText
-                  label='Text'
-                  value={value}
-                  onChange={setValue}
-                  flowIndex={3}
-                  validation='required|string|min:3|max:10'
-                  marginBottom
-                />
-
-                <FieldText
                   mode='flat'
                   label='Money'
                   mask='money'
                   keyboardType='number-pad'
-                  flowIndex={4}
+                  flowIndex={3}
                   value={valueMoney}
                   validation='numeric|min:3|max:10'
                   onChange={setValueMoney}
+                  marginBottom
+                />
+
+                <FieldText
+                  label='Text'
+                  value={value}
+                  onChange={setValue}
+                  flowIndex={4}
+                  validation='required|string|min:3|max:10'
                   marginBottom
                 />
 
@@ -123,6 +127,8 @@ const App = memo(() => {
                   validation='required|date'
                   marginBottom
                 />
+
+                <Button mode='contained' onPress={handleSave}>Save</Button>
               </ValidationContext>
             </FieldValidationConfigContext.Provider>
           </View>

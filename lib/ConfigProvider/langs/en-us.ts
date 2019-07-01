@@ -1,11 +1,12 @@
-import { IConfig } from '@react-form-fields/core/config/context';
-import coreLangENUS from '@react-form-fields/core/lang/en-us';
+import coreLangENUS from '@react-form-fields/core/ConfigProvider/langs/en-us';
 import * as locale from 'date-fns/locale/en-US';
+
+import { IConfig } from '../context';
 
 const langENUS: IConfig = {
   ...coreLangENUS,
   date: {
-    locale,
+    dataFnsLocale: locale,
     pickerLocale: 'en-US',
     formats: {
       date: 'MM/dd/yyyy',

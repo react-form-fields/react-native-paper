@@ -41,7 +41,7 @@
     }
   },
   "dependencies": {
-    "@react-form-fields/core": "^2.0.17",
+    "@react-form-fields/core": "^2.2.1",
     "date-fns": "^2.0.0-alpha.21",
     "react": ">=16.8.0",
     "react-native": ">=0.59.9",

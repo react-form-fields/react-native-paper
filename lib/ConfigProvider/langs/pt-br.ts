@@ -1,11 +1,12 @@
-import { IConfig } from '@react-form-fields/core/config/context';
-import coreLangPTBR from '@react-form-fields/core/lang/pt-br';
+import coreLangPTBR from '@react-form-fields/core/ConfigProvider/langs/pt-br';
 import * as locale from 'date-fns/locale/pt-BR';
+
+import { IConfig } from '../context';
 
 const langPTBR: IConfig = {
   ...coreLangPTBR,
   date: {
-    locale,
+    dataFnsLocale: locale,
     pickerLocale: 'pt-BR',
     formats: {
       date: 'dd/MM/yyyy',

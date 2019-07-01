@@ -1,4 +1,4 @@
-import CoreConfigBuilder from '@react-form-fields/core/config/builder';
+import CoreConfigBuilder from '@react-form-fields/core/ConfigProvider/builder';
 
 import { IConfig } from './context';
 
@@ -7,7 +7,7 @@ export default class ConfigBuilder extends CoreConfigBuilder {
     this.config = {
       ...this.config,
       date: {
-        locale,
+        dataFnsLocale: locale,
         pickerLocale,
         formats,
         labels
@@ -39,7 +39,7 @@ export default class ConfigBuilder extends CoreConfigBuilder {
       validationOn: 'onSubmit',
       textMode: null,
       date: {
-        locale: null,
+        dataFnsLocale: null,
         pickerLocale: 'en-US',
         formats: {
           date: 'yyyy-MM-dd',

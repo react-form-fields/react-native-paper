@@ -1,4 +1,4 @@
-// import ValidationContextRegister from '@react-form-fields/core/components/ValidationContextRegister';
+// import ValidationContextRegister from '@react-form-fields/core/ValidationContextRegister';
 // import { Body, Button, Header, Icon, Left, NativeBase, Picker, Right, Title, View } from 'native-base';
 // import * as React from 'react';
 // import { StyleSheet } from 'react-native';

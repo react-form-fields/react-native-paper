@@ -1,4 +1,4 @@
-import FieldValidationConfigContext from '@react-form-fields/core/config/context';
+import useConfigContext from '@react-form-fields/core/hooks/useConfigContext';
 import useMask from '@react-form-fields/core/hooks/useMask';
 import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
@@ -7,7 +7,7 @@ import * as React from 'react';
 import { StyleSheet, TextStyle, View } from 'react-native';
 import { Text, TextInput, TextInputProps, Theme, withTheme } from 'react-native-paper';
 
-import useFieldFlow, { IFlowIndexProp } from '../hooks/useFieldFlow';
+import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
 
 export interface IFieldTextRef {
   isFocused: () => boolean;
@@ -27,7 +27,7 @@ export interface IFieldTextProps extends PropsResolver<TextInputProps>, IFlowInd
 const FieldText = withTheme(React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((props, ref) => {
   const { onChange, theme, styleError: styleErrorProp, marginBottom } = props;
 
-  const context = React.useContext(FieldValidationConfigContext);
+  const config = useConfigContext();
   const { setDirty, showError, isValid, errorMessage } = useValidation(props);
   const { maskedValue, maskClean } = useMask(props);
 
@@ -65,7 +65,7 @@ const FieldText = withTheme(React.memo(React.forwardRef<IFieldTextRef, IFieldTex
   return (
     <View style={marginBottom ? styles.margin : null}>
       <TextInput
-        mode={context.textMode}
+        mode={config.textMode}
         {...otherProps}
         ref={textInputRef}
         value={maskedValue}

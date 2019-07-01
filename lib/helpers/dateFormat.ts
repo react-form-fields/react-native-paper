@@ -1,6 +1,6 @@
 import * as format from 'date-fns/format';
 
-import { IConfig } from '../config/context';
+import { IConfig } from '../ConfigProvider/context';
 
 const defaultFormats = {
   date: 'yyyy-MM-dd',
@@ -14,7 +14,7 @@ export function dateFormat(value: Date, mode: string, config: IConfig): string {
 
   const dateConfig = getConfigDate(config);
   const formatString = dateConfig.formats[mode] || defaultFormats[mode] || mode;
-  return format(value, formatString, dateConfig.locale ? { locale: dateConfig.locale } : null);
+  return format(value, formatString, dateConfig.dataFnsLocale ? { locale: dateConfig.dataFnsLocale } : null);
 }
 
 function getConfigDate(config: IConfig): IConfig['date'] {

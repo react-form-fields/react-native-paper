@@ -8,9 +8,9 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-form-fields/react-native-paper": "^0.0.1",
-    "expo": "33.0.0",
-    "react": "16.8.3",
+    "@react-form-fields/react-native-paper": "^0.0.2",
+    "expo": "33.0.7",
+    "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-paper": "2.16.0",
@@ -18,13 +18,13 @@
   },
   "resolutions": {
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "@react-form-fields/core": "^2.0.17"
+    "@react-form-fields/core": "^2.1.0"
   },
   "devDependencies": {
-    "@types/react": "16.8.19",
-    "@types/react-native": "0.57.60",
-    "babel-preset-expo": "5.1.1",
-    "typescript": "3.4.5"
+    "@types/react": "16.8.22",
+    "@types/react-native": "0.57.65",
+    "babel-preset-expo": "5.2.0",
+    "typescript": "3.5.2"
   },
   "private": true
 }

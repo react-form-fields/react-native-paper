@@ -1,15 +1,14 @@
-import FieldValidationConfigContextCore from '@react-form-fields/core/config/context';
+import FieldValidationConfigContextCore from '@react-form-fields/core/ConfigProvider';
+import { TextInputProps } from 'react-native-paper';
 
-import ConfigBuilderClass from './builder';
+export { IConfig } from '@react-form-fields/core/ConfigProvider';
 
-export { IConfig } from '@react-form-fields/core/config/context';
-
-declare module '@react-form-fields/core/config/context' {
+declare module '@react-form-fields/core/ConfigProvider' {
   interface IConfig {
     validationOn?: 'onChange' | 'onBlur' | 'onSubmit';
-    textMode?: 'flat' | 'outlined';
+    textMode?: TextInputProps['mode'];
     date?: {
-      locale: any;
+      dataFnsLocale: any;
       pickerLocale: string;
       formats: {
         date: string;
@@ -23,8 +22,6 @@ declare module '@react-form-fields/core/config/context' {
     };
   }
 }
-
-export const ConfigBuilder = ConfigBuilderClass;
 
 const FieldValidationConfigContext = FieldValidationConfigContextCore;
 export default FieldValidationConfigContext;
