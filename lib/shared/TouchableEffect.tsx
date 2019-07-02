@@ -18,4 +18,5 @@ const TouchableEffect = React.memo((props: TouchableOpacityProps & TouchableRipp
   );
 });
 
+TouchableEffect.displayName = 'TouchableEffect';
 export default TouchableEffect;

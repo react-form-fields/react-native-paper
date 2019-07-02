@@ -658,10 +658,10 @@
     hoist-non-react-statics "^2.5.0"
     prop-types "^15.6.0"
 
-"@react-form-fields/core@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.2.2.tgz#ad9ae0af1ca848aca7c7d989e03d77bf58b37630"
-  integrity sha512-GlzObj3UXwWUkqsOTkAs9XlGbxZkbcmKDlyNONkwADOR7bIJHd/vfJZEKsBpMiWNvC2wCOfFA2CGgZd2ECpgMw==
+"@react-form-fields/core@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.2.3.tgz#3ac5dbeaa2f6dade1758350b5bc65569f1459ca0"
+  integrity sha512-xeP8nZPO9CRU2q3Xyjqoecn+w7oue+Uu9gQhvQz9DYKkUgJwArQFsTLo+QgHHKcgnEUXRCYX/V0UGox7/1kxPg==
   dependencies:
     "@types/validatorjs" "^3.15.0"
     intl "^1.2.5"
@@ -716,12 +716,12 @@
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
   integrity sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
 
-"@types/intl@^1.2.0":
+"@types/intl@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/intl/-/intl-1.2.0.tgz#1245511f13064402087979f498764611a3c758fc"
   integrity sha512-BP+KwmOvD9AR5aoxnbyyPr3fAtpjEI/bVImHsotmpuC43+z0NAmjJ9cQbX7vPCq8XcvCeAVc8E3KSQPYNaPsUQ==
 
-"@types/node@12.0.10":
+"@types/node@*", "@types/node@12.0.10":
   version "12.0.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.10.tgz#51babf9c7deadd5343620055fc8aff7995c8b031"
   integrity sha512-LcsGbPomWsad6wmMNv7nBLw7YYYyfdYcz6xryKYQhx89c3XXan+8Q6AJ43G5XDIaklaVkK3mE4fCb0SBvMiPSQ==
@@ -763,6 +763,13 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/uuid@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.5.tgz#d4dc10785b497a1474eae0ba7f0cb09c0ddfd6eb"
+  integrity sha512-MNL15wC3EKyw1VLF+RoVO4hJJdk9t/Hlv3rt1OL65Qvuadm4BYo6g9ZJQqoq7X8NBFSsQXgAujWciovh2lpVjA==
+  dependencies:
+    "@types/node" "*"
 
 "@types/validatorjs@^3.15.0":
   version "3.15.0"
@@ -1725,6 +1732,11 @@ escape-html@~1.0.3:
 escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
+
+eslint-plugin-react-hooks@1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.6.1.tgz#3c66a5515ea3e0a221ffc5d4e75c971c217b1a4c"
+  integrity sha512-wHhmGJyVuijnYIJXZJHDUF2WM+rJYTjulUTqF9k61d3BTk8etydz+M4dXUVH7M76ZRS85rqBTCx0Es/lLsrjnA==
 
 eslint-plugin-react@7.14.2:
   version "7.14.2"
@@ -5153,7 +5165,7 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
 
-uuid@>=3.0.0, uuid@^3.3.2:
+uuid@>=3.0.0, uuid@>=3.3.2, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==

@@ -20,7 +20,7 @@ import {
   ThemeShape,
 } from 'react-native-paper';
 
-const config = new ConfigBuilder().fromLang(langConfig).setTextMode('outlined').build();
+const config = new ConfigBuilder().fromLang(langConfig).build();
 
 const primary = '#011B39';
 const accent = '#FFCC33';
@@ -33,6 +33,7 @@ const App = memo(() => {
   const [messageForm, setMessageForm] = useState('');
   const [value, setValue] = useState('');
   const [valueSelect, setValueSelect] = useState(0);
+  const [valueSelectMultiple, setValueSelectMultiple] = useState([]);
   const [valueDark, setValueDark] = useState(false);
   const [valueRadio, setValueRadio] = useState('');
   const [valueMoney, setValueMoney] = useState(0);
@@ -95,6 +96,28 @@ const App = memo(() => {
                   marginBottom
                 />
 
+                <FieldSelect
+                  label='Select'
+                  flowIndex={8}
+                  value={valueSelect}
+                  options={selectOptions}
+                  onChange={setValueSelect}
+                  validation='required|date'
+                  marginBottom
+                />
+
+                <FieldSelect
+                  label='Select multiple and searchable'
+                  flowIndex={8}
+                  multiple
+                  searchable
+                  options={selectOptions}
+                  value={valueSelectMultiple}
+                  onChange={setValueSelectMultiple}
+                  validation='required|array'
+                  marginBottom
+                />
+
                 <FieldText
                   mode='flat'
                   label='Money'
@@ -109,6 +132,7 @@ const App = memo(() => {
 
                 <FieldText
                   label='Text'
+                  helperText={'just a helper text'}
                   value={value}
                   onChange={setValue}
                   flowIndex={4}
@@ -141,16 +165,6 @@ const App = memo(() => {
                   flowIndex={7}
                   value={valueDate}
                   onChange={setValueDate}
-                  validation='required|date'
-                  marginBottom
-                />
-
-                <FieldSelect
-                  label='Select'
-                  flowIndex={8}
-                  value={valueSelect}
-                  options={selectOptions}
-                  onChange={setValueSelect}
                   validation='required|date'
                   marginBottom
                 />

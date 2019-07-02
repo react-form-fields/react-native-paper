@@ -5,6 +5,11 @@ import { IConfig } from '../context';
 
 const langPTBR: IConfig = {
   ...coreLangPTBR,
+  selectLabels: {
+    done: 'Ok',
+    cancel: 'Cancelar',
+    notFound: 'Nenhum item encontrado'
+  },
   date: {
     dataFnsLocale: locale,
     pickerLocale: 'pt-BR',

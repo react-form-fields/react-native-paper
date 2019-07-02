@@ -4,8 +4,8 @@ import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
-import { StyleSheet, TextStyle, View } from 'react-native';
-import { Text, TextInput, TextInputProps, Theme, withTheme } from 'react-native-paper';
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { HelperText, TextInput, TextInputProps } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
 
@@ -14,28 +14,29 @@ export interface IFieldTextRef {
   clear: () => void;
   focus: () => void;
   blur: () => void;
+  setDirty: (dirty: boolean) => void;
 }
 
 export interface IFieldTextProps extends PropsResolver<TextInputProps>, IFlowIndexProp {
   value: string | number;
   onChange: (value: any) => void;
-  theme: Theme;
-  styleError?: TextStyle;
+  styleError?: TextStyle & ViewStyle;
+  helperText?: string;
   marginBottom?: boolean;
 }
 
-const FieldText = withTheme(React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((props, ref) => {
-  const { onChange, theme, styleError: styleErrorProp, marginBottom } = props;
+const FieldText = React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((props, ref) => {
+
+  const { onChange, styleError, marginBottom, helperText } = props;
 
   const config = useConfigContext();
   const { setDirty, showError, isValid, errorMessage } = useValidation(props);
   const { maskedValue, maskClean } = useMask(props);
 
   const textInputRef = React.useRef<TextInput>();
-  const onFocusFlow = React.useCallback(() => textInputRef.current.focus(), [textInputRef]);
-  const [goNext, hasValidIndex, flowIndex] = useFieldFlow(props, onFocusFlow);
+  const [goNext, hasValidIndex, flowIndex] = useFieldFlow(props, React.useCallback(() => textInputRef.current.focus(), [textInputRef]));
 
-  const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'theme', 'styleError', 'marginBottom');
+  const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'styleError', 'marginBottom');
 
   const onChangeHandler = React.useCallback((text: string) => {
     setDirty(true);
@@ -51,33 +52,32 @@ const FieldText = withTheme(React.memo(React.forwardRef<IFieldTextRef, IFieldTex
     clear: () => textInputRef.current.clear(),
     focus: () => textInputRef.current.focus(),
     blur: () => textInputRef.current.blur(),
-  }), [textInputRef]);
-
-  const styleError = React.useMemo<TextStyle>(() => ({
-    color: theme.colors.error,
-    textAlign: 'right',
-    fontSize: 14,
-    marginTop: 5,
-    marginRight: 5,
-    ...(styleErrorProp || {})
-  }), [theme.colors.error, styleErrorProp]);
+    setDirty: (dirty: boolean) => setDirty(dirty)
+  }), [textInputRef, setDirty]);
 
   return (
     <View style={marginBottom ? styles.margin : null}>
       <TextInput
-        mode={config.textMode}
+        {...(config.textInputProps || {})}
         {...otherProps}
         ref={textInputRef}
-        value={(maskedValue || '').toString()}
+        value={(maskedValue || '').toString() || null}
         onChangeText={onChangeHandler}
         returnKeyType={hasValidIndex ? 'next' : 'default'}
         onSubmitEditing={onSubmitHandler}
         error={showError && !isValid}
       />
-      {showError && !!errorMessage && <Text style={styleError}>{errorMessage}</Text>}
+      <HelperText
+        {...(config.helperTextProps || {})}
+        type={showError ? 'error' : 'info'}
+        visible={showError || !!helperText}
+        style={styleError}
+      >
+        {showError ? errorMessage : helperText}
+      </HelperText>
     </View>
   );
-})));
+}));
 
 FieldText.displayName = 'FieldText';
 

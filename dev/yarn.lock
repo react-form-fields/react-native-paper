@@ -854,10 +854,10 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@react-form-fields/core@^2.0.17", "@react-form-fields/core@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.2.2.tgz#ad9ae0af1ca848aca7c7d989e03d77bf58b37630"
-  integrity sha512-GlzObj3UXwWUkqsOTkAs9XlGbxZkbcmKDlyNONkwADOR7bIJHd/vfJZEKsBpMiWNvC2wCOfFA2CGgZd2ECpgMw==
+"@react-form-fields/core@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.2.3.tgz#3ac5dbeaa2f6dade1758350b5bc65569f1459ca0"
+  integrity sha512-xeP8nZPO9CRU2q3Xyjqoecn+w7oue+Uu9gQhvQz9DYKkUgJwArQFsTLo+QgHHKcgnEUXRCYX/V0UGox7/1kxPg==
   dependencies:
     "@types/validatorjs" "^3.15.0"
     intl "^1.2.5"
@@ -867,18 +867,19 @@
     uuid ">=3.0.0"
     validatorjs "^3.15.1"
 
-"@react-form-fields/react-native-paper@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@react-form-fields/react-native-paper/-/react-native-paper-0.0.2.tgz#aa1ec2db4547600d6f4d37fe8becbc580b5b629b"
-  integrity sha512-OLqs0xyvFBpmz7lOEKnv/0kkRPP/AHB9MszMjHrMtXMoc2zrVAqgrrtWC9DgCb4/tRGRu5RX+vzf8pli9U13Rw==
+"@react-form-fields/react-native-paper@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@react-form-fields/react-native-paper/-/react-native-paper-0.0.3.tgz#38c5fccd03d37748236c0bd2aabdd6b45c12a585"
+  integrity sha512-J4YcDnfOJ1ZiwRqEgNE4xslItv/bn/hbisNoyCm24NBcoRkqKFSCkuVkAfUbn1iZv/V5BctcE3GDACTIJYsqhA==
   dependencies:
-    "@react-form-fields/core" "^2.0.17"
+    "@react-form-fields/core" "^2.2.3"
     date-fns "^2.0.0-alpha.21"
     react ">=16.8.0"
     react-native ">=0.59.9"
     react-native-modal-datetime-picker "^7.5.0"
     react-native-paper ">=2.16.0"
     tslib "^1.10.0"
+    uuid ">=3.3.2"
 
 "@react-native-community/cli@^1.2.1":
   version "1.9.11"
@@ -5765,7 +5766,7 @@ uuid-js@^0.7.5:
   resolved "https://registry.yarnpkg.com/uuid-js/-/uuid-js-0.7.5.tgz#6c886d02a53d2d40dcf25d91a170b4a7b25b94d0"
   integrity sha1-bIhtAqU9LUDc8l2RoXC0p7JblNA=
 
-uuid@>=3.0.0, uuid@^3.3.2:
+uuid@>=3.0.0, uuid@>=3.3.2, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==

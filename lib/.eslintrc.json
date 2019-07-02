@@ -3,6 +3,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "react",
+    "react-hooks",
     "@typescript-eslint"
   ],
   "parserOptions": {
@@ -47,6 +48,8 @@
       "properties": "always"
     }],
     "no-return-await": ["error"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/no-unused-vars": ["warn"],
     "@typescript-eslint/adjacent-overload-signatures": ["error"],
     "@typescript-eslint/interface-name-prefix": ["error", "always"],

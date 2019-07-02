@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-form-fields/react-native-paper": "^0.0.2",
+    "@react-form-fields/react-native-paper": "^0.0.3",
     "expo": "33.0.7",
     "react": "16.8.6",
     "react-dom": "16.8.6",
@@ -18,7 +18,7 @@
   },
   "resolutions": {
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "@react-form-fields/core": "^2.2.2"
+    "@react-form-fields/core": "^2.2.3"
   },
   "devDependencies": {
     "@types/react": "16.8.22",

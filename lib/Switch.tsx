@@ -2,38 +2,32 @@ import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
-import { StyleSheet, TextStyle, View } from 'react-native';
-import { Paragraph, Switch, SwitchProps, Text, Theme, withTheme } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Paragraph, Switch, SwitchProps, Theme } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
+import ErrorHelperText from './shared/ErrorHelperText';
 
 export interface IFieldSwitchProps extends PropsResolver<SwitchProps, 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
   value?: boolean;
   onChange: (checked: boolean) => void;
   theme: Theme;
-  styleError?: TextStyle;
+  helperText?: string;
   marginBottom?: boolean;
 }
 
 const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
-  const { onChange, theme, label, styleError: styleErrorProp, marginBottom, value } = props;
+  const { onChange, helperText, label, marginBottom, value } = props;
 
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'checked', 'onChange', 'label', 'styleError', 'marginBottom');
-
-  const onFocusFlow = React.useCallback(() => { }, []);
-  useFieldFlow(props, onFocusFlow);
+  useFieldFlow(props, React.useCallback(() => { }, []));
 
   const onChangeHandler = React.useCallback((value: boolean) => {
     setDirty(true);
     onChange(value);
   }, [onChange, setDirty]);
-
-  const styleError = React.useMemo<TextStyle>(() => ({
-    color: theme.colors.error,
-    ...(styleErrorProp || {})
-  }), [theme.colors.error, styleErrorProp]);
 
   return (
     <View style={marginBottom ? styles.margin : null}>
@@ -47,7 +41,11 @@ const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
           onValueChange={onChangeHandler}
         />
       </View>
-      {showError && !!errorMessage && <Text style={styleError}>{errorMessage}</Text>}
+      <ErrorHelperText
+        helperText={helperText}
+        showError={showError}
+        errorMessage={errorMessage}
+      />
     </View>
   );
 });
@@ -70,4 +68,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withTheme(FieldSwitch);
+FieldSwitch.displayName = 'FieldSwitch';
+export default FieldSwitch;

@@ -5,6 +5,11 @@ import { IConfig } from '../context';
 
 const langENUS: IConfig = {
   ...coreLangENUS,
+  selectLabels: {
+    done: 'Done',
+    cancel: 'Cancel',
+    notFound: 'Not Found'
+  },
   date: {
     dataFnsLocale: locale,
     pickerLocale: 'en-US',

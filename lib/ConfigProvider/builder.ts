@@ -25,10 +25,18 @@ export default class ConfigBuilder extends CoreConfigBuilder {
     return this;
   }
 
-  public setTextMode(textMode: IConfig['textMode']) {
+  public setTextInputProps(textInputProps: IConfig['textInputProps']) {
     this.config = {
       ...this.config,
-      textMode
+      textInputProps
+    };
+    return this;
+  }
+
+  public setHelperTextProps(helperTextProps: IConfig['helperTextProps']) {
+    this.config = {
+      ...this.config,
+      helperTextProps
     };
     return this;
   }

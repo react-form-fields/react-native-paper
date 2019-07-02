@@ -1,12 +1,18 @@
 import FieldValidationConfigContextCore from '@react-form-fields/core/ConfigProvider';
-import { TextInputProps } from 'react-native-paper';
+import { HelperTextProps, TextInputProps } from 'react-native-paper';
 
 export { IConfig } from '@react-form-fields/core/ConfigProvider';
 
-declare module '@react-form-fields/core/ConfigProvider' {
+declare module '@react-form-fields/core/ConfigProvider/context' {
   interface IConfig {
     validationOn?: 'onChange' | 'onBlur' | 'onSubmit';
-    textMode?: TextInputProps['mode'];
+    textInputProps?: TextInputProps;
+    helperTextProps?: HelperTextProps;
+    selectLabels?: {
+      done: string;
+      cancel: string;
+      notFound: string
+    },
     date?: {
       dataFnsLocale: any;
       pickerLocale: string;
