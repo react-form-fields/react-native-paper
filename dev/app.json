@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "react-form-fields-react-native-paper",
-    "slug": "dev",
+    "slug": "react-form-fields-react-native-paper",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
