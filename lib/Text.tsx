@@ -83,7 +83,7 @@ FieldText.displayName = 'FieldText';
 
 const styles = StyleSheet.create({
   margin: {
-    marginBottom: 20
+    marginBottom: 10
   }
 });
 

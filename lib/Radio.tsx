@@ -60,7 +60,7 @@ const FieldRadio = React.memo((props: IFieldRadioProps) => {
 
 const styles = StyleSheet.create({
   margin: {
-    marginBottom: 20
+    marginBottom: 10
   },
   row: {
     flexDirection: 'row',

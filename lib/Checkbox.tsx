@@ -57,7 +57,7 @@ const FieldCheckbox = React.memo((props: IFieldCheckboxProps) => {
 
 const styles = StyleSheet.create({
   margin: {
-    marginBottom: 20
+    marginBottom: 10
   },
   row: {
     flexDirection: 'row',
