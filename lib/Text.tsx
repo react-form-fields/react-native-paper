@@ -27,7 +27,7 @@ export interface IFieldTextProps extends PropsResolver<TextInputProps>, IFlowInd
 
 const FieldText = React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((props, ref) => {
 
-  const { onChange, styleError, marginBottom, helperText } = props;
+  const { onChange, styleError, marginBottom, helperText, onSubmitEditing, returnKeyType } = props;
 
   const config = useConfigContext();
   const { setDirty, showError, isValid, errorMessage } = useValidation(props);
@@ -63,8 +63,8 @@ const FieldText = React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((p
         ref={textInputRef}
         value={(maskedValue || '').toString() || null}
         onChangeText={onChangeHandler}
-        returnKeyType={hasValidIndex ? 'next' : 'default'}
-        onSubmitEditing={onSubmitHandler}
+        returnKeyType={returnKeyType ? returnKeyType : onSubmitEditing ? 'send' : hasValidIndex ? 'next' : 'default'}
+        onSubmitEditing={onSubmitEditing ? onSubmitEditing : onSubmitHandler}
         error={showError && !isValid}
       />
       <HelperText
