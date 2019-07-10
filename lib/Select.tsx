@@ -62,9 +62,9 @@ const FieldSelect = React.memo((props: IFieldSelectProps) => {
     }
 
     setInternalValue(new Set(multiple ? (value as any) || [] : [value]));
-    setDirty(true);
+    config.validationOn === 'onChange' && setDirty(true);
     setVisibility(true);
-  }, [setInternalValue, setDirty, setVisibility, value, multiple]);
+  }, [setInternalValue, setDirty, setVisibility, value, multiple, config.validationOn]);
 
   const handleDone = React.useCallback(() => {
     onChange(multiple ? Array.from(internalValue) : firstValue);

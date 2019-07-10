@@ -1,3 +1,4 @@
+import useConfigContext from '@react-form-fields/core/hooks/useConfigContext';
 import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
@@ -21,14 +22,15 @@ export interface IFieldRadioProps extends PropsResolver<RadioButtonProps, 'statu
 const FieldRadio = React.memo((props: IFieldRadioProps) => {
   const { onChange, label, helperText, value, marginBottom, radioValue } = props;
 
+  const config = useConfigContext();
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'label', 'styleError', 'marginBottom', 'radioValue');
   useFieldFlow(props, React.useCallback(() => { }, []));
 
   const onChangeHandler = React.useCallback(() => {
-    setDirty(true);
+    config.validationOn === 'onChange' && setDirty(true);
     onChange(radioValue);
-  }, [onChange, setDirty, radioValue]);
+  }, [onChange, setDirty, radioValue, config.validationOn]);
 
   return (
     <View style={marginBottom ? styles.margin : null}>

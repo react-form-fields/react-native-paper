@@ -1,3 +1,4 @@
+import useConfigContext from '@react-form-fields/core/hooks/useConfigContext';
 import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
@@ -20,14 +21,15 @@ export interface IFieldCheckboxProps extends PropsResolver<CheckboxProps, 'statu
 const FieldCheckbox = React.memo((props: IFieldCheckboxProps) => {
   const { onChange, label, helperText, value, marginBottom } = props;
 
+  const config = useConfigContext();
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'label', 'styleError', 'marginBottom');
   useFieldFlow(props, React.useCallback(() => { }, []));
 
   const onChangeHandler = React.useCallback(() => {
-    setDirty(true);
+    config.validationOn === 'onChange' && setDirty(true);
     onChange(!value);
-  }, [value, onChange, setDirty]);
+  }, [value, onChange, setDirty, config.validationOn]);
 
   return (
     <View style={marginBottom ? styles.margin : null}>

@@ -20,7 +20,7 @@ import {
   ThemeShape,
 } from 'react-native-paper';
 
-const config = new ConfigBuilder().fromLang(langConfig).build();
+const configInitial = new ConfigBuilder().fromLang(langConfig).build();
 
 const primary = '#011B39';
 const accent = '#FFCC33';
@@ -30,6 +30,7 @@ const App = memo(() => {
   const scroolViewStyle = useMemo(() => ({ ...styles.scroolView, backgroundColor: theme.colors.background }), [theme.colors.background])
   const validationRef = useRef<IValidationContextRef>();
 
+  const [config, setConfig] = useState(configInitial);
   const [messageForm, setMessageForm] = useState('');
   const [value, setValue] = useState('');
   const [valueSelect, setValueSelect] = useState(0);
@@ -52,6 +53,9 @@ const App = memo(() => {
 
   const handleDismissSnackbar = useCallback(() => setMessageForm(''), [setMessageForm]);
 
+  const setValidationOn = useCallback((checked: boolean) => {
+    setConfig({ ...config, validationOn: checked ? 'onChange' : 'onSubmit' })
+  }, [config, setConfig]);
 
   return (
     <PaperProvider theme={theme}>
@@ -66,6 +70,13 @@ const App = memo(() => {
           <View style={styles.content}>
             <ConfigProvider value={config}>
               <ValidationContext ref={validationRef}>
+                <FieldSwitch
+                  label={`Validation On: ${config.validationOn}`}
+                  value={config.validationOn === 'onChange'}
+                  onChange={setValidationOn}
+                  marginBottom
+                />
+
                 <FieldSwitch
                   label='Dark Mode'
                   value={valueDark}

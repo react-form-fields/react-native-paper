@@ -854,10 +854,10 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@react-form-fields/core@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.2.3.tgz#3ac5dbeaa2f6dade1758350b5bc65569f1459ca0"
-  integrity sha512-xeP8nZPO9CRU2q3Xyjqoecn+w7oue+Uu9gQhvQz9DYKkUgJwArQFsTLo+QgHHKcgnEUXRCYX/V0UGox7/1kxPg==
+"@react-form-fields/core@^2.2.3", "@react-form-fields/core@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@react-form-fields/core/-/core-2.3.1.tgz#be90b521e5c77ad79c5fedda5d2f42b9471e7910"
+  integrity sha512-z+WB3FKnEamRTLKzv6QMAkK8230XcLAwlQpkpg255sYYz8kEKJETqeAXQ6LYkVCi6rMTRdHBcjlGQsheEbwB4Q==
   dependencies:
     "@types/validatorjs" "^3.15.0"
     intl "^1.2.5"

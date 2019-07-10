@@ -5,7 +5,7 @@ export { IConfig } from '@react-form-fields/core/ConfigProvider';
 
 declare module '@react-form-fields/core/ConfigProvider/context' {
   interface IConfig {
-    validationOn?: 'onChange' | 'onBlur' | 'onSubmit';
+    validationOn?: 'onChange' | 'onSubmit';
     textInputProps?: TextInputProps;
     helperTextProps?: HelperTextProps;
     selectLabels?: {

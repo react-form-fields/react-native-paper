@@ -37,10 +37,10 @@ const FieldDatepicker = React.memo((props: IFieldDatepickerProps) => {
   const clearHandler = React.useCallback(() => onChange(null), [onChange]);
 
   const onConfirmHandler = React.useCallback((value: Date) => {
-    fieldTextRef.current.setDirty(true);
+    config.validationOn === 'onChange' && fieldTextRef.current.setDirty(true);
     onChange(value);
     setShowPicker(false);
-  }, [onChange, setShowPicker, fieldTextRef]);
+  }, [onChange, setShowPicker, fieldTextRef, config.validationOn]);
 
   const onCancelHandler = React.useCallback(() => setShowPicker(false), [setShowPicker]);
 

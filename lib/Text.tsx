@@ -39,9 +39,9 @@ const FieldText = React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((p
   const otherProps = useMemoOtherProps(props, 'value', 'onChange', 'styleError', 'marginBottom');
 
   const onChangeHandler = React.useCallback((text: string) => {
-    setDirty(true);
+    config.validationOn === 'onChange' && setDirty(true);
     onChange(maskClean(text));
-  }, [onChange, setDirty, maskClean]);
+  }, [onChange, setDirty, maskClean, config.validationOn]);
 
   const onSubmitHandler = React.useCallback(() => {
     goNext(flowIndex);

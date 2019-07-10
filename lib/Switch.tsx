@@ -1,9 +1,10 @@
+import useConfigContext from '@react-form-fields/core/hooks/useConfigContext';
 import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Paragraph, Switch, SwitchProps, Theme } from 'react-native-paper';
+import { Paragraph, Switch, SwitchProps } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
 import ErrorHelperText from './shared/ErrorHelperText';
@@ -12,7 +13,6 @@ export interface IFieldSwitchProps extends PropsResolver<SwitchProps, 'mask'>, I
   label?: React.ReactNode;
   value?: boolean;
   onChange: (checked: boolean) => void;
-  theme: Theme;
   helperText?: string;
   marginBottom?: boolean;
 }
@@ -20,14 +20,15 @@ export interface IFieldSwitchProps extends PropsResolver<SwitchProps, 'mask'>, I
 const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
   const { onChange, helperText, label, marginBottom, value } = props;
 
+  const config = useConfigContext();
   const { setDirty, showError, errorMessage } = useValidation(props);
   const otherProps = useMemoOtherProps(props, 'checked', 'onChange', 'label', 'styleError', 'marginBottom');
   useFieldFlow(props, React.useCallback(() => { }, []));
 
   const onChangeHandler = React.useCallback((value: boolean) => {
-    setDirty(true);
+    config.validationOn === 'onChange' && setDirty(true);
     onChange(value);
-  }, [onChange, setDirty]);
+  }, [onChange, setDirty, config.validationOn]);
 
   return (
     <View style={marginBottom ? styles.margin : null}>
