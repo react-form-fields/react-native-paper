@@ -4,7 +4,7 @@ import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
-import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { NativeSyntheticEvent, StyleSheet, TextInputSubmitEditingEventData, TextStyle, View, ViewStyle } from 'react-native';
 import { HelperText, TextInput, TextInputProps } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
@@ -43,9 +43,14 @@ const FieldText = React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((p
     onChange(maskClean(text));
   }, [onChange, setDirty, maskClean, config.validationOn]);
 
-  const onSubmitHandler = React.useCallback(() => {
+  const onSubmitHandler = React.useCallback((e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+    if (onSubmitEditing) {
+      setTimeout(() => onSubmitEditing(e), config.validationDelay || 500);
+      return;
+    }
+
     goNext(flowIndex);
-  }, [goNext, flowIndex]);
+  }, [goNext, flowIndex, onSubmitEditing]);
 
   React.useImperativeHandle(ref, () => ({
     isFocused: () => textInputRef.current.isFocused(),
@@ -64,7 +69,7 @@ const FieldText = React.memo(React.forwardRef<IFieldTextRef, IFieldTextProps>((p
         value={(maskedValue || '').toString() || null}
         onChangeText={onChangeHandler}
         returnKeyType={returnKeyType ? returnKeyType : onSubmitEditing ? 'send' : hasValidIndex ? 'next' : 'default'}
-        onSubmitEditing={onSubmitEditing ? onSubmitEditing : onSubmitHandler}
+        onSubmitEditing={onSubmitHandler}
         error={showError && !isValid}
       />
       <HelperText
