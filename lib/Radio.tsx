@@ -3,24 +3,24 @@ import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Paragraph, RadioButton, RadioButtonProps } from 'react-native-paper';
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { HelperText, Paragraph, RadioButton, RadioButtonProps } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
-import ErrorHelperText from './shared/ErrorHelperText';
 import TouchableEffect from './shared/TouchableEffect';
 
 export interface IFieldRadioProps extends PropsResolver<RadioButtonProps, 'status' | 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
   value: string | number;
   radioValue: string | number;
+  styleError?: TextStyle & ViewStyle;
   onChange: (radioValue: any) => void;
   helperText?: string;
   marginBottom?: boolean;
 }
 
 const FieldRadio = React.memo((props: IFieldRadioProps) => {
-  const { onChange, label, helperText, value, marginBottom, radioValue } = props;
+  const { onChange, label, styleError, helperText, value, marginBottom, radioValue } = props;
 
   const config = useConfigContext();
   const { setDirty, showError, errorMessage } = useValidation(props);
@@ -47,11 +47,14 @@ const FieldRadio = React.memo((props: IFieldRadioProps) => {
               {typeof label === 'string' ? <Paragraph style={styles.text}>{label}</Paragraph> : label}
             </View>
           </View>
-          <ErrorHelperText
-            helperText={helperText}
-            showError={showError}
-            errorMessage={errorMessage}
-          />
+          <HelperText
+            {...(config.helperTextProps || {})}
+            type={showError ? 'error' : 'info'}
+            visible={showError || !!helperText}
+            style={styleError}
+          >
+            {showError ? errorMessage : helperText}
+          </HelperText>
         </View>
       </TouchableEffect>
     </View>

@@ -3,22 +3,22 @@ import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Paragraph, Switch, SwitchProps } from 'react-native-paper';
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { HelperText, Paragraph, Switch, SwitchProps } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
-import ErrorHelperText from './shared/ErrorHelperText';
 
 export interface IFieldSwitchProps extends PropsResolver<SwitchProps, 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
   value?: boolean;
+  styleError?: TextStyle & ViewStyle;
   onChange: (checked: boolean) => void;
   helperText?: string;
   marginBottom?: boolean;
 }
 
 const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
-  const { onChange, helperText, label, marginBottom, value } = props;
+  const { onChange, helperText, styleError, label, marginBottom, value } = props;
 
   const config = useConfigContext();
   const { setDirty, showError, errorMessage } = useValidation(props);
@@ -42,11 +42,14 @@ const FieldSwitch = React.memo((props: IFieldSwitchProps) => {
           onValueChange={onChangeHandler}
         />
       </View>
-      <ErrorHelperText
-        helperText={helperText}
-        showError={showError}
-        errorMessage={errorMessage}
-      />
+      <HelperText
+        {...(config.helperTextProps || {})}
+        type={showError ? 'error' : 'info'}
+        visible={showError || !!helperText}
+        style={styleError}
+      >
+        {showError ? errorMessage : helperText}
+      </HelperText>
     </View>
   );
 });

@@ -3,23 +3,23 @@ import useMemoOtherProps from '@react-form-fields/core/hooks/useMemoOtherProps';
 import useValidation from '@react-form-fields/core/hooks/useValidation';
 import { PropsResolver } from '@react-form-fields/core/interfaces/props';
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Checkbox, CheckboxProps, Paragraph } from 'react-native-paper';
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { Checkbox, CheckboxProps, HelperText, Paragraph } from 'react-native-paper';
 
 import useFieldFlow, { IFlowIndexProp } from './hooks/useFieldFlow';
-import ErrorHelperText from './shared/ErrorHelperText';
 import TouchableEffect from './shared/TouchableEffect';
 
 export interface IFieldCheckboxProps extends PropsResolver<CheckboxProps, 'status' | 'mask'>, IFlowIndexProp {
   label?: React.ReactNode;
   value: boolean;
   onChange: (value: boolean) => void;
+  styleError?: TextStyle & ViewStyle;
   marginBottom?: boolean;
   helperText?: string;
 }
 
 const FieldCheckbox = React.memo((props: IFieldCheckboxProps) => {
-  const { onChange, label, helperText, value, marginBottom } = props;
+  const { onChange, label, styleError, helperText, value, marginBottom } = props;
 
   const config = useConfigContext();
   const { setDirty, showError, errorMessage } = useValidation(props);
@@ -44,11 +44,14 @@ const FieldCheckbox = React.memo((props: IFieldCheckboxProps) => {
               {typeof label === 'string' ? <Paragraph style={styles.text}>{label}</Paragraph> : label}
             </View>
           </View>
-          <ErrorHelperText
-            helperText={helperText}
-            showError={showError}
-            errorMessage={errorMessage}
-          />
+          <HelperText
+            {...(config.helperTextProps || {})}
+            type={showError ? 'error' : 'info'}
+            visible={showError || !!helperText}
+            style={styleError}
+          >
+            {showError ? errorMessage : helperText}
+          </HelperText>
         </View>
       </TouchableEffect>
     </View>
